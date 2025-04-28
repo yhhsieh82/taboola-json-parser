@@ -3,6 +3,7 @@ package com.taboola.json;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.util.List;
 import java.util.Map;
 
 public class JSONParserTest {
@@ -13,9 +14,18 @@ public class JSONParserTest {
         String input = "{\"debug\":\"on\",\"window\":{\"title\":\"sample\",\"size\":500}}";
 
         Map<String, Object> output = (Map<String, Object>)JSONParser.parse(input);
-        assert output.get("debug").equals("on");
+        assertEquals("on", output.get("debug"));
         assertEquals("sample", ((Map<String,Object>) output.get("window")).get("title"));
         assertEquals(500, ((Map<String,Object>) output.get("window")).get("size"));
+    }
+
+    @Test
+    public void testParse_ValidJsonArray_ReturnsCorrectResult() {
+        String input = "{\"coins\": [1,2,3]}";
+        Map<String, Object> output = (Map<String, Object>)JSONParser.parse(input);
+        List<Object> coins = (List<Object> )output.get("coins");
+        assertEquals(3, coins.size());
+        assertEquals(1, coins.get(0));
     }
 
     @Test
@@ -26,7 +36,6 @@ public class JSONParserTest {
         assertTrue(map.isEmpty());
     }
 
-    // Tests for parseValue method
     @Test
     public void testParseValue_String_ReturnsCorrectValue() {
         String json = "\"test string\"";

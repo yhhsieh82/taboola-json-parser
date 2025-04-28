@@ -5,6 +5,14 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * JSONParser support parsing the json value into a java object.
+ * A JSON value is either: object, array, string, number, true, false or null.
+ * <p>
+ * These JSON value types can be broadly categorized as:
+ * - Simple Values: string, number, true, false or null.
+ * - Composite Values: object, array (as they are composed of other JSON values).
+ */
 public class JSONParser {
     
     public static Object parse(String jsonString) {

@@ -32,14 +32,13 @@ public class JSONParser {
      */
     public static Object parseValue(String json, int[] inIndexHolder) {
         int i = inIndexHolder[0];
-        char c = json.charAt(i);
-        int[] indexHolder = new int[1];
-
         // Skip whitespace
         while (i < json.length() && Character.isWhitespace(json.charAt(i))) {
             i++;
         }
 
+        char c = json.charAt(i);
+        int[] indexHolder = new int[1];
         Object value;
         if (c == '{') {
             // locate the object first
@@ -108,7 +107,7 @@ public class JSONParser {
      * Parse a JSON object
      * A JSON object is a key(string) and value(JSON value) map
      * @param json the string containing an exact object which is enclosed by brace. start from inIndexHolder[i] and end at end.
-     * @param end the excluded end index of the object.
+     * @param end the end index of the object. exclusive.
      * @param inIndexHolder array of one int which stores the starting index and will be updated to the position after the object
      * @return the parsed object
      */
@@ -167,7 +166,7 @@ public class JSONParser {
      * Parse a JSON array
      * A JSON array is an array of JSON value
      * @param json the string containing an exact array which is enclosed by bracket. start from inIndexHolder[i] and end at end.
-     * @param end the excluded end index of the array.
+     * @param end the end index of the array. exclusive.
      * @param inIndexHolder array of one int which stores the starting index and will be updated to the position after the object
      * @return the parsed array
      */
@@ -297,4 +296,6 @@ public class JSONParser {
             return Integer.parseInt(numStr);
         }
     }
+
+
 }
